@@ -1,0 +1,65 @@
+@charset "utf-8";
+* {
+    -moz-box-sizing: border-box; /*Firefox3.5+*/
+    -webkit-box-sizing: border-box; /*Safari3.2+*/
+    -o-box-sizing: border-box; /*Opera9.6*/
+    -ms-box-sizing: border-box; /*IE8*/
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+a, a:hover {
+    text-decoration: none !important;
+    color: inherit;
+}
+
+fieldset, img {
+    border: none;
+}
+
+ol, ul, li {
+    list-style: none;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+/*禁用了文本的拖拉，尤其在谷歌下*/
+textarea {
+    resize: none;
+}
+
+.iblock {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+
+.pull-left {
+    float: left;
+}
+
+.pull-right {
+    float: right;
+}
+
+/*清除浮动代码*/
+.clearfloat:after {
+    display: block;
+    clear: both;
+    content: "";
+    visibility: hidden;
+    height: 0;
+}
+
+.clearfloat {
+    zoom: 1
+}
+
+
+

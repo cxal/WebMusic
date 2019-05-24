@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="CSS/reset.css">
+    <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="CSS/Login.css">
+    <script src="plugins/caroursel/js/jquery-1.9.1.min.js"></script>
+    <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="warpper">
+    <div class="login-content">
+        <div class="login">
+            <div class="title text-center">WebMusic</div>
+            <!--登陆表单-->
+            <form id="formLogin" action="" style="position:relative;" class="">
+                <div class="form-group">
+                    <input class="form-control required" type="text" placeholder="用户名" id="loginName"
+                           name="username"/>
+                    <span id="msg" class="error hidespan detials"></span>
+                </div>
+                <div class="form-group">
+                    <input class="form-control required" type="password" placeholder="密码" id="password"
+                           name="password"/>
+                    <span id="tips" class="error hidespan detials"></span>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox">
+                        <input type="checkbox" name="remember" id="remember" value="0"/>记住我
+                    </label>
+                </div>
+                <div class="form-group">
+                    <button id="btnLogin" type="button" class="btn btn-primary" name="submit" style="margin-right: 10px;">登录</button>
+                    <button id="btnRegister" type="button" class="btn btn-default" name="submit">注册</button>
+                </div>
+            </form>
+            <!--注册表单-->
+            <form id="formRegister" action="" style="position:relative;" class="display-none">
+                <div class="form-group">
+                    <input class="form-control required" type="text" placeholder="登录名" id="re-Name"
+                           name="username"/>
+                    <span id="re-msg" class="error hidespan detials"></span>
+                </div>
+                <div class="form-group">
+                    <input class="form-control required" type="password" placeholder="密码" id="re-password"
+                           name="password"/>
+                    <span id="re-tips" class="error hidespan detials"></span>
+                </div>
+                <div class="form-group">
+                    <button id="re-btn" type="button" class="btn btn-primary" name="submit" style="margin-right: 10px;">注册</button>
+                    <button id="ca-btn" type="button" class="btn btn-default" name="submit">返回</button>
+                </div>
+                <div class="re-success"></div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        if (window.history && window.history.pushState) {
+            $(window).on('popstate', function () {
+                window.history.pushState('forward', null, '#');
+                window.history.forward(1);
+            });
+        }
+        window.history.pushState('forward', null, '#'); //在IE中必须得有这两行
+        window.history.forward(1);
+        //注册
+        $('#btnRegister').on('click',function () {
+            $('#formLogin').addClass('display-none');
+            $('#formRegister').removeClass('display-none');
+        });
+        $('#ca-btn').on('click',function () {
+            $('#formRegister').addClass('display-none');
+            $('#formLogin').removeClass('display-none');
+        });
+        $('#re-btn').on('click',function () {
+            var reName = $('#re-Name').val();
+            var rePassword = $('#re-password').val();
+            if (reName.length && rePassword.length) {
+                console.log(rePassword);
+                $.ajax({
+                    type: "POST",
+                    cache: false,
+                    contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                    traditional: true,
+                    url: "PHP/register.php",
+                    dataType: "json",
+                    data: {userName: reName,password:rePassword},
+                    success: function (data) {
+                        $('#re-Name').val('');
+                        $('#re-password').val('');
+                        $('.re-success').text(data);
+                    },
+                    error: function () {
+                        window.alert('此用户已存在');
+                        window.location.href = "#";
+                    }
+                })
+            }
+        });
+        //登录
+        // 如果曾经记住密码直接读取账号密码
+        localStorage.getItem('loginName') && $('#loginName').val(localStorage.getItem('loginName'));
+        localStorage.getItem('password') && $('#password').val(localStorage.getItem('password'));
+        var windowH = $(window).height();
+        var loginH = $('.login').height();
+        change();
+        function change() {
+            $('.login').css('margin-top', (windowH - loginH) / 2 + 'px');
+        }
+
+        $(window).resize(function () {
+            change();
+        });
+        $('#btnLogin').on('click', function () {
+            var loginName = $('#loginName').val();
+            var password = $('#password').val();
+            if (loginName.length && password.length) {
+                if ($('#remember')[0].checked) {
+                    localStorage.setItem('loginName', loginName);
+                } else {
+                    localStorage.removeItem('loginName');
+                    localStorage.removeItem('password');
+                }
+                $.ajax({
+                    type: "POST",
+                    cache: false,
+                    contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                    traditional: true,
+                    url: "PHP/userLogin.php",
+                    dataType: "json",
+                    data: {userName:loginName},
+                    success: function (data) {
+                        if (data.password == password) {
+                            window.location.href="./index.html?userId="+ data.userId;
+                        } else {
+                            $('#tips').show();
+                            $('#tips').text('密码错误');
+                            $('#password').val('');
+                        }
+                    },
+                    error: function () {
+                        window.alert('登录失败，请重新登录');
+                        window.location.href="#";
+                    },
+                    complete: function () {
+                    }
+                });
+            }
+        });
+        //校验账号的格式
+        $('#loginName').blur(check_code);
+        $('#re-Name').blur(reCheck_code);
+        function check_code() {
+            //获取账号
+            var _loginName = document.getElementById("loginName").value;
+            var _NameLength = _loginName.length;
+            var reg =  /^\w{4,10}$/;
+            //校验是否填入为空
+            if(!_loginName){
+                $('#msg').show();
+                $('#msg').text('用户名不能为空');
+            }else if(_NameLength<4 || _NameLength>10){
+                $('#msg').show();
+                $('#msg').text('用户名长度错误');
+            }else if(reg.test(_loginName)){
+                $('#msg').hide();
+                $('#msg').text('');//校验格式为字母，数字或下划线，且长度在6-10字符内
+            }else{
+                $('#msg').show();
+                $('#msg').text('用户名格式错误');
+            }
+        }
+      function reCheck_code() {
+        //获取账号
+        var _loginName = document.getElementById("re-Name").value;
+        var _NameLength = _loginName.length;
+        var reg =  /^\w{4,10}$/;
+        //校验是否填入为空
+        if(!_loginName){
+          $('#re-msg').show();
+          $('#re-msg').text('用户名不能为空');
+        }else if(_NameLength<4 || _NameLength>10){
+          $('#re-msg').show();
+          $('#re-msg').text('用户名长度错误');
+        }else if(reg.test(_loginName)){
+          $('#re-msg').hide();
+          $('#re-msg').text('');//校验格式为字母，数字或下划线，且长度在6-10字符内
+        }else{
+          $('#re-msg').show();
+          $('#re-msg').text('用户名格式错误');
+        }
+      }
+        //校验密码是否输入
+        $('#password').blur(check_pwd);
+        $('#re-password').blur(reCheck_pwd);
+        function check_pwd(){
+            var _password = document.getElementById("password").value;
+            if(!_password){
+                $('#tips').show();
+                $('#tips').text('密码不能为空');
+            }else{
+                $('#tips').hide();
+                $('#tips').text('');
+            }
+        }
+      function reCheck_pwd(){
+        var _password = document.getElementById("re-password").value;
+        if(!_password){
+          $('#re-tips').show();
+          $('#re-tips').text('密码不能为空');
+        }else{
+          $('#re-tips').hide();
+          $('#re-tips').text('');
+        }
+      }
+    })
+</script>
+</body>
+</html>
