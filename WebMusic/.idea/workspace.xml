@@ -2,18 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="14bcc1a7-78d7-418d-b3d4-8eb8cae7ca69" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/8e326086-98b0-483f-9a36-a2d911cf516e.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/8e326086-98b0-483f-9a36-a2d911cf516e.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PHP/collect.php" beforeDir="false" afterPath="$PROJECT_DIR$/PHP/collect.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PHP/myPlayList.php" beforeDir="false" afterPath="$PROJECT_DIR$/PHP/myPlayList.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PHP/newPlayList.php" beforeDir="false" afterPath="$PROJECT_DIR$/PHP/newPlayList.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PHP/playListSong.php" beforeDir="false" afterPath="$PROJECT_DIR$/PHP/playListSong.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PHP/playListSongDetail.php" beforeDir="false" afterPath="$PROJECT_DIR$/PHP/playListSongDetail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PHP/recommend.php" beforeDir="false" afterPath="$PROJECT_DIR$/PHP/recommend.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PHP/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/PHP/register.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PHP/userLogin.php" beforeDir="false" afterPath="$PROJECT_DIR$/PHP/userLogin.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kuayu.php" beforeDir="false" afterPath="$PROJECT_DIR$/kuayu.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -110,11 +99,6 @@
     <auto-save>true</auto-save>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP" />
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-5" />
-    <option name="width" value="1390" />
-    <option name="height" value="790" />
-  </component>
   <component name="ProjectId" id="1PlGU0CVVfUuoMUBHanOilhgfvS" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
@@ -190,8 +174,16 @@
       <workItem from="1557812823533" duration="8352000" />
       <workItem from="1558500990149" duration="1099000" />
       <workItem from="1558612359717" duration="688000" />
-      <workItem from="1566441283268" duration="159000" />
+      <workItem from="1566441283268" duration="491000" />
     </task>
+    <task id="LOCAL-00001" summary="数据库变更，接口拿数据优化">
+      <created>1566441510296</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1566441510296</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -207,6 +199,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="数据库变更，接口拿数据优化" />
+    <option name="LAST_COMMIT_MESSAGE" value="数据库变更，接口拿数据优化" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
