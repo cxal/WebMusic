@@ -8,7 +8,7 @@
 header('Content-type:text/json;charset=UTF-8');
 $Mname = $_POST['musicName'];
 $Url = 'http://music.163.com/api/search/get/web?type=1&limit=6&s=';
-$searchUrl = $Url.$Mname;
+$searchUrl = $Url.urlencode($Mname);
 $information = file_get_contents($searchUrl);
 echo $information;
 

@@ -10,7 +10,8 @@ $userId = $_POST['userId'];
 $name = $_POST['playlistName'];
 $songId = $_POST['songID'];
 // 创建连接
-$conn = new mysqli('localhost', 'root', '89259583cx', 'cxal');
+$conn = new mysqli('localhost', 'root', '', 'cxal');
+mysqli_set_charset( $conn , "utf8" );
 // Check connection
 if ($conn->connect_error) {
   die("连接失败: " . $conn->connect_error);
